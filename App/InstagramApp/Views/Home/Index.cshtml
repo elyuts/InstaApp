@@ -4,18 +4,7 @@
 
 <app asp-prerender-module="ClientApp/dist/main-server">Loading...</app>
 
-</body>
-
 <script src="~/dist/vendor.js" asp-append-version="true"></script>
 @section scripts {
     <script src="~/dist/main-client.js" asp-append-version="true"></script>
 }
-<script>
-
-    let urlPaths = window.location.href.split('#');
-    if (urlPaths.length > 1 && urlPaths[1].includes('access_token')) {
-        var access_token = urlPaths[1].split('=')[1];
-        localStorage.setItem('access_token', access_token);
-        window.location.href = urlPaths[0];
-    }
-</script>

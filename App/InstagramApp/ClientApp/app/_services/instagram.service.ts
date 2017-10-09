@@ -3,6 +3,8 @@ import { Response } from '@angular/http';
 import { AuthHttp } from './authhttp.service';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { LocalStorageService } from 'angular-2-local-storage';
+import { GetMediaResponse } from '../_models/User'
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -11,26 +13,43 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class InstagramService {
 
-    constructor(private http: Http) { }
+    accessTokenKey = 'access_token';
 
-    //getAll(): Observable<Project[]> {
-    //    return this.http.get('/project/getAll')
-    //        .map(res => res.json() as Project[])
-    //        .catch(this.handleError);
-    //}
+    constructor(
+        private http: Http,
+        private localStorageService: LocalStorageService) { }
 
-    //getById(id: string): Observable<Project> {
-    //    return this.http.get('/project/getById/' + id)
-    //        .map(res => res.json() as Project)
-    //        .catch(this.handleError);
-    //}
+    accessToken() {
 
-    //create(project: Project): Observable<Project> {
-    //    return this.http.post('/Project/Create', project)
-    //        .map(res => res.json().data as Project)
-    //        .catch(this.handleError);
-    //}
+        var token: string = this.localStorageService.get(this.accessTokenKey);
 
+        if (!token && (typeof localStorage != 'undefined') && localStorage.getItem(this.accessTokenKey)) {
+            token = String(localStorage.getItem(this.accessTokenKey));
+            this.localStorageService.set(this.accessTokenKey, token);
+        }
+        return token;
+    }
+
+    isLoggedIn(): boolean {
+        var token = this.accessToken();
+        console.log(`token = ${token}`);
+        return token != null;
+    }
+
+    getCurrentUser() {
+    }
+
+    getCurrentUserMedia(): Observable<GetMediaResponse[]> {
+        return this.http.get('https://api.instagram.com/v1/users/self/media/recent?access_token=' + this.accessToken())
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    getCurrentUserLikedMedia(): Observable<GetMediaResponse[]> {
+        return this.http.get('https://api.instagram.com/v1/users/self/media/liked?access_token=' + this.accessToken())
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
 
     private handleError(err: any) {
         console.error(err.message);

@@ -55,7 +55,7 @@ namespace InstagramApp.Controllers
         [HttpGet]
         public ActionResult LoginInstagram()
         {
-            
+
             return Redirect("https://www.instagram.com/oauth/authorize/?client_id=5d4a37f3ca7f4b0199bf25fe2cedfb69&redirect_uri=https://localhost:44384/home&response_type=token");
         }
 

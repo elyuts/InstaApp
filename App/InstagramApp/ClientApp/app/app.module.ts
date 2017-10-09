@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UniversalModule } from 'angular2-universal';
-import { AppComponent } from './components/app/app.component'
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { LocalStorageModule } from 'angular-2-local-storage';
+
+import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { AuthHttp } from './_services/authhttp.service';
+import { InstagramService } from './_services/instagram.service';
 
 @NgModule({
-    bootstrap: [ AppComponent ],
     declarations: [
         AppComponent,
         NavMenuComponent,
@@ -19,12 +22,18 @@ import { AuthHttp } from './_services/authhttp.service';
         HomeComponent
     ],
     providers: [
-        AuthHttp
+        AuthHttp,
+        InstagramService
     ],
     imports: [
-        UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        CommonModule,
+        HttpModule,
         FormsModule,
         ReactiveFormsModule,
+        LocalStorageModule.withConfig({
+            prefix: 'my-app',
+            storageType: 'localStorage'
+        }),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -34,5 +43,5 @@ import { AuthHttp } from './_services/authhttp.service';
         ])
     ]
 })
-export class AppModule {
+export class AppModuleShared {
 }

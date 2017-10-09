@@ -24,8 +24,10 @@ export class AuthHttp {
     // private helper methods
 
     private jwt() {
+        var userString: string = String(localStorage.getItem('currentUser'));
+
         // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(userString);
         if (currentUser && currentUser.token) {
             let headers = new Headers({
                 'Content-Type': 'application/json',
