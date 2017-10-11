@@ -1,10 +1,10 @@
 ﻿import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { AuthHttp } from './authhttp.service';
-import { Http } from '@angular/http';
+import { Http, Jsonp, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { GetMediaResponse } from '../_models/User'
+import { GetMediaResponse, User } from '../_models/User'
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -14,10 +14,17 @@ import 'rxjs/add/operator/catch';
 export class InstagramService {
 
     accessTokenKey = 'access_token';
+    params: URLSearchParams;        //work around for jsonp
 
     constructor(
         private http: Http,
-        private localStorageService: LocalStorageService) { }
+        private jsonp: Jsonp,
+        private localStorageService: LocalStorageService) {
+
+        this.params = new URLSearchParams();
+        this.params.set('format', 'json');
+        this.params.set('callback', '__ng_jsonp__.__req0.finished');
+    }
 
     accessToken() {
 
@@ -36,23 +43,28 @@ export class InstagramService {
         return token != null;
     }
 
-    getCurrentUser() {
-    }
-
-    getCurrentUserMedia(): Observable<GetMediaResponse[]> {
-        return this.http.get('https://api.instagram.com/v1/users/self/media/recent?access_token=' + this.accessToken())
-            .map(res => res.json())
+    getCurrentUser(): Observable<User> {
+        return this.jsonp.get('https://api.instagram.com/v1/users/self?access_token=' + this.accessToken(), { search: this.params })
+            .map(res => res.json().data)
             .catch(this.handleError);
     }
 
-    getCurrentUserLikedMedia(): Observable<GetMediaResponse[]> {
-        return this.http.get('https://api.instagram.com/v1/users/self/media/liked?access_token=' + this.accessToken())
-            .map(res => res.json())
+    getCurrentUserMedia(): Observable<GetMediaResponse[]> {
+
+        return this.jsonp.get('https://api.instagram.com/v1/users/self/media/recent?access_token=' + this.accessToken(), { search: this.params })
+            .map(res => res.json().data)
+            .catch(this.handleError);
+    }
+
+    getUserLikedMedia(): Observable<GetMediaResponse[]> {
+
+        return this.jsonp.get('https://api.instagram.com/v1/users/self/media/liked?access_token=' + this.accessToken(), { search: this.params })
+            .map(res => res.json().data)
             .catch(this.handleError);
     }
 
     private handleError(err: any) {
-        console.error(err.message);
-        return Observable.throw(err.message || err)
+        console.error(err);
+        return Observable.throw(err)
     }
 }

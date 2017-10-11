@@ -1,23 +1,29 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { InstagramService } from '../../_services/instagram.service';
+import { MediaType, GetMediaResponse, MediaResponse } from '../../_models/User';
+import { SelectableImage } from '../../_models/SelectableImage';
 
 @Component({
     selector: 'fetchdata',
     templateUrl: './fetchdata.component.html'
 })
 export class FetchDataComponent {
-    public forecasts: WeatherForecast[];
+    public imageList: SelectableImage[] = [];
 
-    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
-        http.get(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-            this.forecasts = result.json() as WeatherForecast[];
-        }, error => console.error(error));
+    constructor(instagramService: InstagramService) {
+        instagramService.getCurrentUserMedia().subscribe(result => {
+            this.iterateThroughMediaResponseList(result);
+        });
     }
-}
 
-interface WeatherForecast {
-    dateFormatted: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
+    iterateThroughMediaResponseList(list: MediaResponse[]) {
+        list.forEach(x => {
+            if (x.type == MediaType.image) {
+                this.imageList.push(new SelectableImage(x.images.standard_resolution.url));
+            } else if (x.type == MediaType.carousel) {
+                this.iterateThroughMediaResponseList(x.carousel_media);
+            }
+        });
+    }
 }
