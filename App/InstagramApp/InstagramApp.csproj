@@ -25,14 +25,19 @@
   <ItemGroup>
     <None Remove="ClientApp\app\_models\SelectableImage.ts" />
     <None Remove="ClientApp\app\_models\User.ts" />
+    <None Remove="ClientApp\app\_services\account.service.ts" />
     <None Remove="ClientApp\app\_services\authhttp.service.ts" />
+    <None Remove="ClientApp\app\_services\cart.service.ts" />
     <None Remove="ClientApp\app\_services\instagram.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\image\image.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\_models\SelectableImage.ts" />
     <TypeScriptCompile Include="ClientApp\app\_models\User.ts" />
+    <TypeScriptCompile Include="ClientApp\app\_services\account.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\_services\authhttp.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\_services\cart.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\_services\instagram.service.ts" />
   </ItemGroup>
 

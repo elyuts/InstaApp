@@ -10,8 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using InstagramApp.DataAccess.Context;
 using InstagramApp.DataAccess.Interfaces;
 using InstagramApp.DataAccess;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Logging;
 
 namespace InstagramApp

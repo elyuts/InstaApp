@@ -9,18 +9,24 @@ import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
+import { ImageComponent } from './components/image/image.component';
 import { AuthHttp } from './_services/authhttp.service';
+import { AccountService } from './_services/account.service';
+import { CartService } from './_services/cart.service';
 import { InstagramService } from './_services/instagram.service';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
+        HomeComponent,
         FetchDataComponent,
-        HomeComponent
+        ImageComponent
     ],
     providers: [
         AuthHttp,
+        AccountService,
+        CartService,
         InstagramService
     ],
     imports: [

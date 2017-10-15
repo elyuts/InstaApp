@@ -4,21 +4,7 @@
 
 <p *ngIf="!imageList.length"><em>Loading...</em></p>
 
-<table class="table col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2 form-horizontal" *ngIf="imageList.length">
-    <!--<thead>
-        <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-        </tr>
-    </thead>-->
-    <tbody>
-        <tr *ngFor="let image of imageList">
-            <td>
-                <input type="checkbox" [checked]="image.selected" (click)="image.switch()">
-            </td>
-            <td>
-                <img src="{{image.url}}">
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="flex-container" *ngIf="imageList.length">
+    <image *ngFor="let image of imageList" [source]="image" class="flex-element">
+    </image>
+</div>

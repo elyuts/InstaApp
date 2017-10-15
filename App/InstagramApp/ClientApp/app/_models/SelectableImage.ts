@@ -1,9 +1,11 @@
-﻿export class SelectableImage {
-    url: string;
+﻿import { Images } from '../_models/User';
+
+export class SelectableImage {
+    images: Images;
     selected: boolean;
 
-    constructor(url: string) {
-        this.url = url;
+    constructor(images: Images) {
+        this.images = images;
         this.selected = false;
     }
 
