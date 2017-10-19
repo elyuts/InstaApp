@@ -23,6 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\cart-item\cart-item.component.ts" />
+    <None Remove="ClientApp\app\components\cart\cart.component.ts" />
     <None Remove="ClientApp\app\_models\SelectableImage.ts" />
     <None Remove="ClientApp\app\_models\User.ts" />
     <None Remove="ClientApp\app\_services\account.service.ts" />
@@ -32,6 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\cart-item\cart-item.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\cart\cart.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\image\image.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\_models\SelectableImage.ts" />
     <TypeScriptCompile Include="ClientApp\app\_models\User.ts" />

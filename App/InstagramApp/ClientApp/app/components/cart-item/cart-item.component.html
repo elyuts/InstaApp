@@ -3,8 +3,7 @@
         <img class="thumbnail-image" src="{{image.thumbnail.url}}" (click)="openFullSize()">
     </div>
     <div class="col-md-2">
-        <button *ngIf="!image.selected" type="button" class="btn" (click)="addToCart()">Add To Cart</button>
-        <button *ngIf="image.selected" type="button" class="btn" (click)="removeFromCart()">Remove From Cart</button>
+        <button type="button" class="btn" (click)="removeFromCart()">Remove From Cart</button>
     </div>
 </div>
 <div class="modal" [ngClass]="{'display': isZoomed}" (click)="closeFullSize()">

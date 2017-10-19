@@ -1,11 +1,13 @@
-﻿import { Images } from '../_models/User';
+﻿import { Image } from '../_models/User';
 
-export class SelectableImage {
-    images: Images;
+export class SelectableImage extends Image {
     selected: boolean;
 
-    constructor(images: Images) {
-        this.images = images;
+    constructor(image: Image) {
+        super();
+        this.thumbnail = image.thumbnail;
+        this.low_resolution = image.low_resolution;
+        this.standard_resolution = image.standard_resolution;
         this.selected = false;
     }
 

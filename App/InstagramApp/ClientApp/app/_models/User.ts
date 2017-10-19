@@ -1,33 +1,33 @@
-﻿export class User {
+﻿export interface InstagramUser {
     id: number;
-    user_name: string;
+    username: string;
     full_name: string;
     profile_picture: string;
 }
 
-export class MediaResponse {
-    type: string | MediaType;
-    images: Images;
-    carousel_media: MediaResponse[]
+export interface InstagramMediaResponse {
+    type: string | InstagramMediaType;
+    images: Image;
+    carousel_media: InstagramMediaResponse[]
 }
 
-export class GetMediaResponse extends MediaResponse {
+export interface InstagramGetMediaResponse extends InstagramMediaResponse {
     id: string;
-    user: User;
+    user: InstagramUser;
 }
 
-export class MediaType {
+export class InstagramMediaType {
     static image = "image";
     static carousel = "carousel";
 }
 
-export class Images {
-    thumbnail: Image;
-    low_resolution: Image;
-    standard_resolution: Image;
+export class Image {
+    thumbnail: InstagramImage;
+    low_resolution: InstagramImage;
+    standard_resolution: InstagramImage;
 }
 
-export class Image {
+export interface InstagramImage {
     wigth: number;
     height: number;
     url: string;

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { InstagramService } from '../../_services/instagram.service';
 import { CartService } from '../../_services/cart.service';
-import { MediaType, MediaResponse } from '../../_models/User';
+import { InstagramMediaType, InstagramMediaResponse } from '../../_models/User';
 import { SelectableImage } from '../../_models/SelectableImage';
-import { Images } from '../../_models/User';
+import { Image } from '../../_models/User';
 
 @Component({
     selector: 'fetchdata',
@@ -12,7 +12,7 @@ import { Images } from '../../_models/User';
 })
 export class FetchDataComponent implements OnInit {
     public imageList: SelectableImage[] = [];
-    public imagesInCart: Images[] = [];
+    public imagesInCart: Image[] = [];
 
     constructor(private instagramService: InstagramService, private cartService: CartService) {
     }
@@ -24,13 +24,13 @@ export class FetchDataComponent implements OnInit {
         });
     }
 
-    private iterateThroughMediaResponseList(list: MediaResponse[]) {
+    private iterateThroughMediaResponseList(list: InstagramMediaResponse[]) {
         list.forEach(x => {
-            if (x.type == MediaType.image) {
+            if (x.type == InstagramMediaType.image) {
                 var image = new SelectableImage(x.images);
-                image.selected = this.cartService.imageIsInCart(image.images)
+                image.selected = this.cartService.imageIsInCart(image);
                 this.imageList.push(image);
-            } else if (x.type == MediaType.carousel) {
+            } else if (x.type == InstagramMediaType.carousel) {
                 this.iterateThroughMediaResponseList(x.carousel_media);
             }
         });

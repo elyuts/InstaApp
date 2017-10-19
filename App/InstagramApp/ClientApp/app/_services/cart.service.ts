@@ -2,7 +2,7 @@
 import { AccountService } from '../_services/account.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { SelectableImage } from '../_models/SelectableImage';
-import { GetMediaResponse, User, Images } from '../_models/User';
+import { InstagramGetMediaResponse, InstagramUser, Image } from '../_models/User';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -16,7 +16,7 @@ export class CartService {
         private localStorageService: LocalStorageService) {
     }
 
-    public addPicture(image: Images): boolean {
+    public addPicture(image: Image): boolean {
         var images = this.getPictures();
         images.push(image);
 
@@ -24,9 +24,9 @@ export class CartService {
         return this.localStorageService.set(token, images);
     }
 
-    public removePicture(image: Images): boolean {
+    public removePicture(image: Image): boolean {
         var images = this.getPictures();
-        var newImages: Images[] = [];
+        var newImages: Image[] = [];
 
         images.forEach(x => {
             if (x.thumbnail.url != image.thumbnail.url)
@@ -37,7 +37,7 @@ export class CartService {
         return this.localStorageService.set(token, newImages);
     }
 
-    public imageIsInCart(image: Images): boolean {
+    public imageIsInCart(image: Image): boolean {
         var images = this.getPictures();
 
         var result = false;
@@ -51,9 +51,9 @@ export class CartService {
         return result;
     }
 
-    public getPictures(): Images[] {
+    public getPictures(): Image[] {
         var token = this.accountService.accessToken();
-        var images = this.localStorageService.get<Images[]>(token);
+        var images = this.localStorageService.get<Image[]>(token);
         if (!images) 
             images = [];
 

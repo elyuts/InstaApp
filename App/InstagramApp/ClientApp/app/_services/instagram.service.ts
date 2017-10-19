@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Jsonp, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { GetMediaResponse, User } from '../_models/User';
+import { InstagramGetMediaResponse, InstagramUser } from '../_models/User';
 import { AccountService } from '../_services/account.service';
 
 import 'rxjs/add/operator/map';
@@ -16,20 +16,20 @@ export class InstagramService {
         private accountService: AccountService) {
     }
 
-    getCurrentUser(): Observable<User> {
+    getCurrentUser(): Observable<InstagramUser> {
         return this.jsonp.get('https://api.instagram.com/v1/users/self?access_token=' + this.accountService.accessToken() + '&callback=JSONP_CALLBACK')
             .map(res => res.json().data)
             .catch(this.handleError);
     }
 
-    getCurrentUserMedia(): Observable<GetMediaResponse[]> {
+    getCurrentUserMedia(): Observable<InstagramGetMediaResponse[]> {
 
         return this.jsonp.get('https://api.instagram.com/v1/users/self/media/recent?access_token=' + this.accountService.accessToken() + '&callback=JSONP_CALLBACK')
             .map(res => res.json().data)
             .catch(this.handleError);
     }
 
-    getUserLikedMedia(): Observable<GetMediaResponse[]> {
+    getUserLikedMedia(): Observable<InstagramGetMediaResponse[]> {
 
         return this.jsonp.get('https://api.instagram.com/v1/users/self/media/liked?access_token=' + this.accountService.accessToken() + '&callback=JSONP_CALLBACK')
             .map(res => res.json().data)
