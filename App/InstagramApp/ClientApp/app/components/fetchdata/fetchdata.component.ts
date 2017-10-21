@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InstagramService } from '../../_services/instagram.service';
 import { CartService } from '../../_services/cart.service';
 import { InstagramMediaType, InstagramMediaResponse } from '../../_models/User';
-import { SelectableImage } from '../../_models/SelectableImage';
+import { SelectableImage } from '../../_models/SelectableImage.model';
 import { Image } from '../../_models/User';
 
 @Component({

@@ -12,6 +12,9 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { ImageComponent } from './components/image/image.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
+
+import { QuantityInputComponent } from './components/quantity-input/quantity-input.component';
+
 import { AuthHttp } from './_services/authhttp.service';
 import { AccountService } from './_services/account.service';
 import { CartService } from './_services/cart.service';
@@ -25,7 +28,8 @@ import { InstagramService } from './_services/instagram.service';
         FetchDataComponent,
         ImageComponent,
         CartComponent,
-        CartItemComponent
+        CartItemComponent,
+        QuantityInputComponent
     ],
     providers: [
         AuthHttp,

@@ -5,6 +5,9 @@
     <div class="col-md-2">
         <button type="button" class="btn" (click)="removeFromCart()">Remove From Cart</button>
     </div>
+    <div class="col-md-2">
+        <qty-input [(qty)]="image.quantity" (onChange)="onQtyChange()"></qty-input>
+    </div>
 </div>
 <div class="modal" [ngClass]="{'display': isZoomed}" (click)="closeFullSize()">
 

@@ -1,6 +1,6 @@
 ﻿import { Component, Input } from '@angular/core';
 import { CartService } from '../../_services/cart.service';
-import { SelectableImage } from '../../_models/SelectableImage';
+import { SelectableImage } from '../../_models/SelectableImage.model';
 
 @Component({
     selector: 'image',

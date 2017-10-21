@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../_services/cart.service';
 import { InstagramMediaType, InstagramMediaResponse } from '../../_models/User';
-import { SelectableImage } from '../../_models/SelectableImage';
-import { Image } from '../../_models/User';
+import { SelectableImage } from '../../_models/SelectableImage.model';
+import { ImageInCart } from '../../_models/ImageInCart.model';
 
 @Component({
     selector: 'cart',
@@ -10,7 +10,7 @@ import { Image } from '../../_models/User';
     styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-    public imageList: Image[] = [];
+    public imageList: ImageInCart[] = [];
     
     constructor(private cartService: CartService) {
     }
@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
         this.imageList = this.cartService.getPictures();
     }
 
-    deleteItem(image: Image) {
+    deleteItem(image: ImageInCart) {
         if (this.cartService.removePicture(image)) {
 
             let index = this.imageList.indexOf(image);

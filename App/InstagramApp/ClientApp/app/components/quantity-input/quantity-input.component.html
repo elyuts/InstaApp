@@ -1,0 +1,13 @@
+﻿<div class="input-group">
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default btn-number" [disabled]="minIsReached()" (click)="clickMinus()">
+            <span class="glyphicon glyphicon-minus"></span>
+        </button>
+    </span>
+    <input type="text" class="form-control input-number" [value]="qty" [min]="min" [max]="max">
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default btn-number" [disabled]="maxIsReached()" (click)="clickPlus()">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+    </span>
+</div>
