@@ -15,13 +15,13 @@ export class ImageComponent {
     }
 
     public addToCart() {
-        if (this.cartService.addPicture(this.image))
-            this.image.selected = true;
+        this.cartService.addPicture(this.image);
+        this.image.selected = true;
     }
 
     public removeFromCart() {
-        if (this.cartService.removePicture(this.image))
-            this.image.selected = false;
+        this.cartService.removePicture(this.image);
+        this.image.selected = false;
     }
 
     public openFullSize() {

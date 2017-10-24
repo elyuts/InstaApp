@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { InstagramService } from '../../_services/instagram.service';
+import { AccountService } from '../../_services/account.service';
 
 @Component({
     selector: 'home',
@@ -8,11 +7,10 @@ import { InstagramService } from '../../_services/instagram.service';
 })
 export class HomeComponent {
 
-    constructor(private instagramService: InstagramService) {
+    constructor(private accountService: AccountService) {
     }
 
     isLoggedIn(): boolean {
-
-        return false;//this.instagramService.isLoggedIn();
+        return this.accountService.isLoggedIn();
     }
 }

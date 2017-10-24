@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule, Jsonp, Response } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { LocalStorageModule } from 'angular-2-local-storage';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -15,10 +14,11 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
 
 import { QuantityInputComponent } from './components/quantity-input/quantity-input.component';
 
-import { AuthHttp } from './_services/authhttp.service';
 import { AccountService } from './_services/account.service';
 import { CartService } from './_services/cart.service';
 import { InstagramService } from './_services/instagram.service';
+import { LocalStorageService } from './_services/local-storage.service';
+import { LocalStorage } from './_services/local-storage';
 
 @NgModule({
     declarations: [
@@ -32,10 +32,11 @@ import { InstagramService } from './_services/instagram.service';
         QuantityInputComponent
     ],
     providers: [
-        AuthHttp,
         AccountService,
         CartService,
-        InstagramService
+        InstagramService,
+        LocalStorageService,
+        { provide: LocalStorage, useValue: { getItem() { } } }
     ],
     imports: [
         CommonModule,
@@ -43,10 +44,6 @@ import { InstagramService } from './_services/instagram.service';
         JsonpModule,
         FormsModule,
         ReactiveFormsModule,
-        LocalStorageModule.withConfig({
-            prefix: 'my-app',
-            storageType: 'localStorage'
-        }),
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

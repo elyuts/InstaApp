@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
-import { AccountService } from '../_services/account.service';
-import { LocalStorageService } from 'angular-2-local-storage';
+import { AccountService } from './account.service';
+import { LocalStorageService } from './local-storage.service';
 import { SelectableImage } from '../_models/SelectableImage.model';
 import { ImageInCart } from '../_models/ImageInCart.model';
 import { InstagramGetMediaResponse, InstagramUser, Image } from '../_models/User';
@@ -17,15 +17,15 @@ export class CartService {
         private localStorageService: LocalStorageService) {
     }
 
-    public addPicture(image: Image): boolean {
+    public addPicture(image: Image) {
         var images = this.getPictures();
         images.push(new ImageInCart(image));
 
         var token = this.accountService.accessToken();
-        return this.localStorageService.set(token, images);
+        this.localStorageService.set(token, images);
     }
 
-    public updateQuantity(image: ImageInCart): boolean {
+    public updateQuantity(image: ImageInCart) {
         var images = this.getPictures();
 
         images.forEach(x => {
@@ -34,10 +34,10 @@ export class CartService {
         });
 
         var token = this.accountService.accessToken();
-        return this.localStorageService.set(token, images);
+        this.localStorageService.set(token, images);
     }
 
-    public removePicture(image: Image): boolean {
+    public removePicture(image: Image) {
         var images = this.getPictures();
         var newImages: Image[] = [];
 
@@ -47,7 +47,7 @@ export class CartService {
         });
 
         var token = this.accountService.accessToken();
-        return this.localStorageService.set(token, newImages);
+        this.localStorageService.set(token, newImages);
     }
 
     public imageIsInCart(image: Image): boolean {
@@ -66,7 +66,7 @@ export class CartService {
 
     public getPictures(): ImageInCart[] {
         var token = this.accountService.accessToken();
-        var images = this.localStorageService.get<ImageInCart[]>(token);
+        var images: ImageInCart[] = this.localStorageService.getObject(token);
         if (!images) 
             images = [];
 

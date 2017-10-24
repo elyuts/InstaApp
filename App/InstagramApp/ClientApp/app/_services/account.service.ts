@@ -1,28 +1,29 @@
-﻿import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'angular-2-local-storage';
+﻿import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { LocalStorageService } from './local-storage.service';
+import { isPlatformServer } from '@angular/common'
 
 @Injectable()
 export class AccountService {
 
-    accessTokenKey = 'access_token';
-
-    constructor(private localStorageService: LocalStorageService) {
+    get accessTokenKey() {
+        return 'access_token';
     }
 
-    accessToken() {
+    constructor(
+        private localStorageService: LocalStorageService,
+        @Inject(PLATFORM_ID) private platformId: Object) {
+    }
 
-        var token: string = this.localStorageService.get(this.accessTokenKey);
-
-        if (!token && (typeof localStorage != 'undefined') && localStorage.getItem(this.accessTokenKey)) {
-            token = String(localStorage.getItem(this.accessTokenKey));
-            this.localStorageService.set(this.accessTokenKey, token);
-        }
-        return token;
+    accessToken(): string {
+        return this.localStorageService.getString(this.accessTokenKey);
     }
 
     isLoggedIn(): boolean {
+        if (isPlatformServer(this.platformId))
+            return false;
+
         var token = this.accessToken();
         console.log(`token = ${token}`);
-        return token != null;
+        return !!token;
     }
 }

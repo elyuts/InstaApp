@@ -20,13 +20,11 @@ export class CartComponent implements OnInit {
     }
 
     deleteItem(image: ImageInCart) {
-        if (this.cartService.removePicture(image)) {
+        this.cartService.removePicture(image);
+        let index = this.imageList.indexOf(image);
 
-            let index = this.imageList.indexOf(image);
-
-            if (index > -1) {
-                this.imageList.splice(index, 1);
-            }
+        if (index > -1) {
+            this.imageList.splice(index, 1);
         }
     }
 

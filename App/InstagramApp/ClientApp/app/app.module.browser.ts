@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppModuleShared } from './app.module';
 import { AppComponent } from './components/app/app.component';
+import { AccountService } from './_services/account.service';
+import { LocalStorage } from './_services/local-storage';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -10,7 +12,9 @@ import { AppComponent } from './components/app/app.component';
         AppModuleShared
     ],
     providers: [
-        { provide: 'BASE_URL', useFactory: getBaseUrl }
+        { provide: 'BASE_URL', useFactory: getBaseUrl },
+        AccountService,
+        { provide: LocalStorage, useValue: window.localStorage }
     ]
 })
 export class AppModule {

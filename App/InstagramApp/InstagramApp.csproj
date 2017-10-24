@@ -27,9 +27,10 @@
     <None Remove="ClientApp\app\components\cart\cart.component.ts" />
     <None Remove="ClientApp\app\components\quantity-input\quantity-input.component.ts" />
     <None Remove="ClientApp\app\_services\account.service.ts" />
-    <None Remove="ClientApp\app\_services\authhttp.service.ts" />
     <None Remove="ClientApp\app\_services\cart.service.ts" />
     <None Remove="ClientApp\app\_services\instagram.service.ts" />
+    <None Remove="ClientApp\app\_services\local-storage.service.ts" />
+    <None Remove="ClientApp\app\_services\local-storage.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,9 +39,10 @@
     <TypeScriptCompile Include="ClientApp\app\components\image\image.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\quantity-input\quantity-input.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\_services\account.service.ts" />
-    <TypeScriptCompile Include="ClientApp\app\_services\authhttp.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\_services\cart.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\_services\instagram.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\_services\local-storage.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\_services\local-storage.ts" />
   </ItemGroup>
 
   <ItemGroup>
