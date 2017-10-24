@@ -1,4 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AccountService } from '../../_services/account.service';
 import { CartService } from '../../_services/cart.service';
 import { InstagramMediaType, InstagramMediaResponse } from '../../_models/User';
 import { SelectableImage } from '../../_models/SelectableImage.model';
@@ -12,10 +14,18 @@ import { ImageInCart } from '../../_models/ImageInCart.model';
 export class CartComponent implements OnInit {
     public imageList: ImageInCart[] = [];
     
-    constructor(private cartService: CartService) {
+    constructor(
+        private accountService: AccountService,
+        private cartService: CartService,
+        private router: Router) {
     }
 
     ngOnInit() {
+        if (!this.accountService.isLoggedIn()) {
+            this.router.navigate(['/home']);
+            return;
+        }
+
         this.imageList = this.cartService.getPictures();
     }
 

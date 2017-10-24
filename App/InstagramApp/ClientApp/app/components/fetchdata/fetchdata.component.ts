@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { InstagramService } from '../../_services/instagram.service';
+import { AccountService } from '../../_services/account.service';
 import { CartService } from '../../_services/cart.service';
 import { InstagramMediaType, InstagramMediaResponse } from '../../_models/User';
 import { SelectableImage } from '../../_models/SelectableImage.model';
@@ -14,10 +16,19 @@ export class FetchDataComponent implements OnInit {
     public imageList: SelectableImage[] = [];
     public imagesInCart: Image[] = [];
 
-    constructor(private instagramService: InstagramService, private cartService: CartService) {
+    constructor(
+        private accountService: AccountService,
+        private instagramService: InstagramService,
+        private cartService: CartService,
+        private router: Router) {
     }
 
     ngOnInit() {
+        if (!this.accountService.isLoggedIn()) {
+            this.router.navigate(['/home']);
+            return;
+        }
+
         this.imagesInCart = this.cartService.getPictures();
         this.instagramService.getCurrentUserMedia().subscribe(result => {
             this.iterateThroughMediaResponseList(result);

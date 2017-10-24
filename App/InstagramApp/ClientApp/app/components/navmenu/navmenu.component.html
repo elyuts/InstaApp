@@ -17,14 +17,14 @@
                         <span class='glyphicon glyphicon-home'></span> Home
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li *ngIf="isLoggedIn()" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/fetch-data']">
                         <span class='glyphicon glyphicon-th-list'></span> Instagram Feed
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
+                <li *ngIf="isLoggedIn()" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/cart']">
-                        <span class='glyphicon glyphicon-shopping-cart'></span> Shoping Cart
+                        <span class='glyphicon glyphicon-shopping-cart'></span> Shopping Cart
                     </a>
                 </li>
             </ul>
