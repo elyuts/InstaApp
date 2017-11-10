@@ -3,6 +3,6 @@
 <p *ngIf="!imageList.length"><em>Loading...</em></p>
 
 <div class="flex-container" *ngIf="imageList.length">
-    <image *ngFor="let image of imageList" [source]="image" class="flex-element">
+    <image *ngFor="let image of imageList" [source]="image">
     </image>
 </div>

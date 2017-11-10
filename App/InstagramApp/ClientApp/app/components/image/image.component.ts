@@ -31,4 +31,7 @@ export class ImageComponent {
     public closeFullSize() {
         this.isZoomed = false;
     }
+
+    public doNothing() {
+    }
 }

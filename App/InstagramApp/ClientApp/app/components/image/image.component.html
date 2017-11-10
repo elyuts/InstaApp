@@ -1,20 +1,10 @@
-﻿<div class="row">
-    <div class="col-md-3">
-        <img class="thumbnail-image" src="{{image.thumbnail.url}}" (click)="openFullSize()">
-    </div>
-    <div class="col-md-2">
-        <button *ngIf="!image.selected" type="button" class="btn" (click)="addToCart()">Add To Cart</button>
-        <button *ngIf="image.selected" type="button" class="btn" (click)="removeFromCart()">Remove From Cart</button>
+﻿<div class="main">
+    <div style="width: 150px;">
+            <img class="thumbnail-image" src="{{image.thumbnail.url}}" (click)="openFullSize()">
+            <button *ngIf="!image.selected" type="button" class="btn btn-info button" (click)="addToCart()">Add To Cart</button>
+            <button *ngIf="image.selected" type="button" class="btn btn-info button" (click)="removeFromCart()">Remove From Cart</button>
     </div>
 </div>
-<div class="modal" [ngClass]="{'display': isZoomed}" (click)="closeFullSize()">
-
-    <!-- The Close Button -->
-    <span class="close" (click)="closeFullSize()">&times;</span>
-
-    <!-- Modal Content (The Image) -->
-    <img class="modal-content" src="{{image.standard_resolution.url}}">
-
-    <!-- Modal Caption (Image Text) -->
-    <div class="caption">Caption</div>
+<div class="modal" [ngClass]="{'display': isZoomed }" (click)="closeFullSize()">
+    <img  class="modal-content" src="{{image.standard_resolution.url}}" />
 </div>
