@@ -75,4 +75,17 @@ export class CartService {
         return images;
     }
 
+    public  get pricePerPhoto(): number {
+        return 0.15;
+    }
+
+    public getTotaPrice(): number {
+        var items = this.getPictures();
+
+        var totalQty = 0;
+        items.forEach(x => totalQty += x.quantity);
+
+        return totalQty * this.pricePerPhoto;
+    }
+
 }

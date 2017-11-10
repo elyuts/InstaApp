@@ -3,6 +3,8 @@
 <p *ngIf="!imageList.length"><em>Loading...</em></p>
 
 <div class="flex-container" *ngIf="imageList.length">
-    <cart-item *ngFor="let image of imageList" [source]="image" (delete)="deleteItem(image)" class="flex-element">
+    <cart-item *ngFor="let image of imageList" [source]="image" (delete)="deleteItem(image)" (cartUpdate)="updateTotal()" class="flex-element">
     </cart-item>
 </div>
+<span>Total price: {{totalPrice | currency}}</span>
+<button class="btn btn-primary col-xs-12" [routerLink]="['/home']">Next step</button>

@@ -10,6 +10,7 @@ import { ImageInCart } from '../../_models/ImageInCart.model';
 export class CartItemComponent {
     @Input("source") image: ImageInCart;
     @Output() delete = new EventEmitter();
+    @Output() cartUpdate = new EventEmitter();
     public isZoomed: boolean;
 
     constructor(private cartService: CartService) {
@@ -28,7 +29,7 @@ export class CartItemComponent {
     }
 
     onQtyChange() {
-        console.log(`onQtyChange=${this.image.quantity}`);
         this.cartService.updateQuantity(this.image);
+        this.cartUpdate.emit();
     }
 }

@@ -13,6 +13,7 @@ import { ImageInCart } from '../../_models/ImageInCart.model';
 })
 export class CartComponent implements OnInit {
     public imageList: ImageInCart[] = [];
+    public totalPrice: number;
     
     constructor(
         private accountService: AccountService,
@@ -27,6 +28,7 @@ export class CartComponent implements OnInit {
         }
 
         this.imageList = this.cartService.getPictures();
+        this.updateTotal();
     }
 
     deleteItem(image: ImageInCart) {
@@ -36,7 +38,11 @@ export class CartComponent implements OnInit {
         if (index > -1) {
             this.imageList.splice(index, 1);
         }
+
+        this.updateTotal();
     }
 
-
+    updateTotal() {
+        this.totalPrice = this.cartService.getTotaPrice();
+    }
 }
